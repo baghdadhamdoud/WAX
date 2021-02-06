@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Wax Vêtement</title>
+    <title>Wax Vêtement k</title>
     <!--    MY CSS ----------------------------------------------------------------------------------->
     <!--    CSS of INDEX-->
     <link href="css/index.css" rel="stylesheet"/>
