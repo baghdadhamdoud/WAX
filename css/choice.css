@@ -1,0 +1,47 @@
+#choice{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+#choice div{
+    width: 48%;
+    height: 98%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    backdrop-filter: brightness(30%);
+}
+#choice div.tissue{
+    background-image: url("../pictures/choice/tissue.jpg");
+    background-position: center;
+    background-size: cover;
+}
+#choice div.clothes{
+    background-image: url("../pictures/choice/clothes.jpg");
+    background-position: center;
+    background-size: cover;
+}
+#choice .choisissez{
+    position: absolute;
+    font-size: 2em;
+    font-weight: bold;
+    color: #E8DFD8;
+    background-color: rgba(2, 30, 77, 0.9);
+    border-radius: 50%;
+    padding: 5px;
+	top: 50%;
+	left: 47%;
+    height: 10%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+#choice div:hover{
+    cursor: pointer;
+    backdrop-filter: brightness(10%);
+}

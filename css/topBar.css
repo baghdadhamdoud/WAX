@@ -1,0 +1,44 @@
+#topBar{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 8vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgba(255,255,255,0.9);
+    z-index: 1;
+}
+/*WAX PAGE*/
+#topBar .wax-page{
+	font-weight: bold;
+	font-size: 1.5em;
+	font-style: italic;
+}
+#topBar .wax-page:hover{
+	cursor: pointer;
+}
+/*WELCOME and DECONNEXION*/
+#topBar .welcome, #topBar .deconnexion{
+    display: none;
+}
+/*PANIER*/
+#topBar .panier-topbar img{
+    width: 30px;
+}
+#topBar .panier-topbar img:hover{
+    cursor: pointer;
+}
+/*CONNEXION*/
+#topBar .connexion_inscription{
+    width: 180px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+#topBar .connexion_inscription p:hover, #topBar .deconnexion p:hover{
+    cursor: pointer;
+}

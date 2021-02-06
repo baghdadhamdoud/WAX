@@ -1,0 +1,86 @@
+#connexion{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+}
+#connexion .outer{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.8;
+    z-index: 2;
+}
+#connexion .main{
+    z-index: 3;
+    position: relative;
+    background-color: rgba(255,255,255,1);
+    width: 40%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+#connexion .main p.title{
+    font-weight: bold;
+}
+#connexion .main .inscription{
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    font-style: italic;
+    color: darkblue;
+}
+#connexion .main .inscription:hover{
+    cursor: pointer;
+}
+#connexion .main .exit{
+    position: absolute;
+    top: 2px;
+    right: 2px;
+}
+#connexion .main .exit:hover{
+    cursor: pointer;
+}
+#connexion .main .input{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+    width: 90%;
+    height: 25%;
+}
+#connexion .main .input input{
+    width: 100%;
+    height: 50%;
+    text-align: center;
+    outline: none;
+    border: none;
+    background-color: rgb(209, 200, 200);
+}
+#connexion .main .input p.alert{
+    display: none;
+    font-size: 0.8em;
+    position: absolute;
+    left: 0;
+    transform: translateY(150%);
+    color: #E8DFD8;
+    background-color: rgba(255,0,0,0.8);
+}
+#connexion .main .input .placeholder{
+    position: absolute;
+    font-style: italic;
+    font-size: 0.8em;
+    transition: 0.15s;
+    pointer-events: none;
+}
+input:focus + .placeholder, input:valid + .placeholder{
+    transform: translateY(-200%) scale(0.8);
+}

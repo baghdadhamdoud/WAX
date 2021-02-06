@@ -1,0 +1,26 @@
+#main{
+    width: 100%;
+    position: relative;
+}
+#container-products{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.product{
+    padding-top: 5px;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.product .img-product{
+    width: 100%;
+}
+.product p{
+    margin: 2px 0 2px 0;
+}

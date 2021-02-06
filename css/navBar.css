@@ -1,0 +1,59 @@
+#navBar{
+    position: fixed;
+    top: 9vh;
+    width: 10vw;
+    height: 90vh;
+	display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgba(255,255,255,0.9);
+	transition: 0.3s;
+    z-index: 1;
+}
+#navBar button{
+    position: absolute;
+    top: 50%;
+    right:-20px;
+}
+#navBar *{
+    padding: revert;
+    font-size: 0.95em;
+}
+#navBar ul{
+    list-style-type:none;
+}
+#navBar ul#nav-clothes{
+    transform: translateX(-15%);
+}
+#navBar ul#nav-tissue{
+    transform: translateX(-50%);
+}
+#navBar ul#nav-footer{
+    transform: translateX(-15%);
+}
+#navBar #nav-clothes-sexe{
+    margin: 15px 0 15px 0;
+}
+#navBar p.navigation{
+    font-weight: bold;
+    font-size: 1em;
+    text-shadow: 0 1px 1px black;
+}
+#navBar .li:hover{
+    cursor: pointer;
+    font-weight: bold;
+}
+#navBar #nav-clothes li.title{
+    pointer-events: none;
+}
+/* Traitement ------------------------------------------ */
+.navBar_hide{
+	transform: translateX(-9vw);
+}
+.navBar_show{
+	transform: translateX(0);
+}
+.li_choose{
+    font-weight: bold;
+}
