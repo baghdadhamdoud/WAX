@@ -23,9 +23,12 @@ function get_tissues_nav_bar(){
     foreach ($tissues as $id_tissue => $tissue){
         ?>
         <div class="product">
-            <img class="img-product" src="<?php print $tissue['path_photo'] ?>" alt="Photo du Tissu">
-            <p class="title-product"><?php print $tissue['label']?></p>
-            <p class="price-product"><?php print $tissue['prix_unit']?></p>
+            <img class="img" src="<?php print $tissue['path_photo'] ?>" alt="Photo du Tissu">
+            <div class="desc">
+                <span class="id"><?php print $id_tissue?></span>
+                <p class="title"><?php print $tissue['label']?></p>
+                <p class="price"><?php print $tissue['prix_unit'].' DA/m&#xB2; '?></p>
+            </div>
         </div>
         <?php
     }
@@ -45,9 +48,12 @@ function get_clothes_nav_bar(){
     foreach ($clothes as $id_clothe => $clothe){
         ?>
         <div class="product">
-            <img class="img-product" src="<?php print $clothe['path_photo'] ?>" alt="Photo du Vêtement">
-            <p class="title-product"><?php print $clothe['label']?></p>
-            <p class="price-product"><?php print $clothe['prix_vetement']?></p>
+            <img class="img" src="<?php print $clothe['path_photo'] ?>" alt="Photo du Vêtement">
+            <div class="desc">
+                <span class="id"><?php print $id_clothe?></span>
+                <p class="title"><?php print $clothe['label']?></p>
+                <p class="price"><?php print $clothe['prix_vetement'].' DA'?></p>
+            </div>
         </div>
         <?php
     }

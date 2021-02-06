@@ -51,8 +51,6 @@
 #connexion .main .exit:hover{
     transform: rotate(180deg);
     font-weight: bold;
-}
-#connexion .main .exit:hover{
     cursor: pointer;
 }
 #connexion .main .input{

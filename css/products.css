@@ -1,26 +1,94 @@
 #main{
     width: 100%;
     position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
 }
 #container-products{
-    width: 100%;
+    width: 80%;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
 }
-.product{
-    padding-top: 5px;
-    width: 30%;
+#container-products .product{
+    width: 45%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    margin-top: 1%;
+    transition: 0.3s;
 }
-.product .img-product{
+#container-products .product:hover{
+    transform: translateY(-10px);
+    cursor: pointer;
+}
+#container-products .product .desc{
     width: 100%;
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
 }
-.product p{
+#container-products .product .desc .id{
+    display: none;
+}
+#container-products .product .img{
+    width: 100%;
+    box-shadow: 5px 5px 10px 0 black;
+}
+#container-products .product .desc p{
     margin: 2px 0 2px 0;
+    font-weight: bold;
 }
+/* DISPLAY ---------------------------------------------- */
+#main .display{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+
+}
+#main .display .outer{
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+    background-color: black;
+    position: absolute;
+}
+#main .display .product{
+    z-index: 2;
+    background-color: rgba(255,255,255,1);
+    width: 50%;
+    height: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+#main .display .product .exit{
+    position: absolute;
+    font-size: 1.5em;
+    top: 5px;
+    right: 5px;
+    transition: 0.5s;
+    padding: 5px;
+}
+#main .display .product .exit:hover{
+    transform: rotate(180deg);
+    font-weight: bold;
+    cursor: pointer;
+}
+

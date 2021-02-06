@@ -6,6 +6,12 @@ ob_start();
     <?php include_once 'choice.php';?>
 <!-- CONTAINER OF PRODUCTS ---------------------------------------------------- -->
     <div id="container-products"></div>
+    <div class="display">
+        <div class="outer"></div>
+        <div class="product">
+            <span class="exit">X</span>
+        </div>
+    </div>
 </main>
 <?php
 $main = ob_get_clean();
