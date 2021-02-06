@@ -42,8 +42,15 @@
 }
 #connexion .main .exit{
     position: absolute;
-    top: 2px;
-    right: 2px;
+    font-size: 1.5em;
+    top: 5px;
+    right: 5px;
+    transition: 0.5s;
+    padding: 5px;
+}
+#connexion .main .exit:hover{
+    transform: rotate(180deg);
+    font-weight: bold;
 }
 #connexion .main .exit:hover{
     cursor: pointer;

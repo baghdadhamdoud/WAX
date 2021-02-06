@@ -3,7 +3,7 @@ ob_start();
 ?>
 <!-- NAV BAR ---------------------------------------------------- -->
 <nav id="navBar">
-	<button type="button">Nav</button>
+	<span class="btn">&#8594;</span>
     <p class="navigation">Navigation</p>
 	<ul id="nav-tissue">
 		<li class="li title">Tissus</li>

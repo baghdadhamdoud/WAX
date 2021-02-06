@@ -15,7 +15,7 @@
         </div>
         <button class="btn_valid" type="button">Valider</button>
         <span class="inscription">Inscription</span>
-        <span class="exit">Exit</span>
+        <span class="exit">X</span>
     </div>
 </div>
 <?php echo ob_get_clean();

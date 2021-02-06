@@ -30,7 +30,7 @@ function NavBar() {
 			const data_php = {target:'get_tissues_nav_bar'};
 			navBar.hand_of_my_db(data_php).done(function (tissues) {
 				$('#container-products .product').remove();
-				$('#container-products').append(tissues);
+				$('#container-products').append(tissues).show('slow');
 			});
 		});
 		$(document).on('click', '#navBar #nav-clothes #nav-clothes-sexe li', function (e) {
@@ -61,13 +61,19 @@ function NavBar() {
     this.main = function () {
 		this.set_types_of_clothes();
 		this.set_navBar_onclick();
-		$('#navBar').addClass('navBar_hide').hide();
-			$(document).on('click', '#navBar button', function(){
-				if($('#navBar').hasClass('navBar_hide')){
-					$('#navBar').addClass('navBar_show').removeClass('navBar_hide');
+		$('#navBar').hide();
+			$(document).on('click', '#navBar .btn', function(){
+				if(!$('#navBar').hasClass('navBar_show')){
+					$('#navBar').addClass('navBar_show');
 				}
 				else{
-					$('#navBar').addClass('navBar_hide').removeClass('navBar_show');
+					$('#navBar').removeClass('navBar_show');
+				}
+				if(!$('#navBar .btn').hasClass('rotate_arrow')){
+					$('#navBar .btn').addClass('rotate_arrow');
+				}
+				else {
+					$('#navBar .btn').removeClass('rotate_arrow');
 				}
 			});
     }
