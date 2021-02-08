@@ -67,3 +67,33 @@ function get_types_of_clothes_from_db(){
     }
     return $result;
 }
+
+function get_product_by_id($id, $tissue_or_clothes){
+    global $conn;
+    $product = [];
+    switch ($tissue_or_clothes){
+        case 'tissue':
+            try{
+                $stmt = $conn->prepare("SELECT * FROM tissu, produit
+                                        WHERE id_tissu = :id AND id_produit_fk = id_produit ");
+                $stmt->execute(array('id'=>$id));
+                $product = $stmt->fetch();
+                $stmt->closeCursor();
+            }catch(PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
+            return $product;
+        case 'clothes':
+            try{
+                $stmt = $conn->prepare("SELECT * FROM vetement, produit
+                                        WHERE id_vetement = :id AND id_produit_fk = id_produit ");
+                $stmt->execute(array('id'=>$id));
+                $product = $stmt->fetch();
+                $stmt->closeCursor();
+            }catch(PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
+            return $product;
+    }
+    return null;
+}

@@ -6,7 +6,7 @@ function Products() {
         return $.ajax({
             url: 'php_backend/controller/display_product.php',
             type: 'POST',
-            dataType: 'json',
+            dataType: 'html',
             data: data,
             error: function (r, s, e) {
                 console.log(e);
@@ -18,13 +18,13 @@ function Products() {
         $('#main .display').hide();
         $(document).on('click', '#main #container-products .product', function (e) {
             const id_product = $(e.target).find('.desc .id').text();
-            const data_php = {target:'get_product_by_id', id:id_product};
-            $('#main .display').show('slow');
-            console.log('bb');
-            // products.hand_of_my_db(data_php).done(function (product, status) {
-            //     console.log('produit chargé');
-            //     $('#main .display').show('slow');
-            // })
+            const tissue_or_clothes = $(e.target).find('.desc .tissue_or_clothes').text();
+            const data_php = {target:'display_product', id:id_product, tissue_or_clothes:tissue_or_clothes};
+            products.hand_of_my_db(data_php).done(function (product, status) {
+                console.log(product);
+                $('#main .display .product').append(product);
+                $('#main .display').show('slow');
+            })
         })
 
         $(document).on('click', '#main .display .product .exit, #main .display .outer', function () {
