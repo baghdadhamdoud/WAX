@@ -21,13 +21,13 @@ function Products() {
             const tissue_or_clothes = $(e.target).find('.desc .tissue_or_clothes').text();
             const data_php = {target:'display_product', id:id_product, tissue_or_clothes:tissue_or_clothes};
             products.hand_of_my_db(data_php).done(function (product, status) {
-                console.log(product);
                 $('#main .display .product').append(product);
                 $('#main .display').show('slow');
             })
         })
 
         $(document).on('click', '#main .display .product .exit, #main .display .outer', function () {
+            $('#main .display .product img, #main .display .product .desc').remove();
             $('#main .display').hide('slow');
         })
     }

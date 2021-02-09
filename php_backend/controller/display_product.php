@@ -18,7 +18,13 @@ function display_product(){
                 <span class="tissue_or_clothes" style="display: none">tissue</span>
                 <span class="id" style="display: none"><?php print $product['id_tissu']?></span>
                 <p class="label"><?php print $product['label']?></p>
+                <div class="input_surface">
+                    <input type="number" required>
+                    <span class="placeholder">Entrer une surface</span>
+                    <span class="m_carre">M&#xB2;</span>
+                </div>
                 <p class="price"><?php print $product['prix_unit'].' DA/m&#xB2;'?></p>
+                <button type="button"><img src="pictures/icon/add_to_basket.png" alt="Icon Basket"></button>
             </div>
             <?php
             return ob_get_clean();
@@ -30,8 +36,9 @@ function display_product(){
                 <span class="tissue_or_clothes" style="display: none">clothes</span>
                 <span class="id" style="display: none"><?php print $product['id_vetement']?></span>
                 <p class="label"><?php print $product['label']?></p>
-                <p class="label"><?php print $product['article']?></p>
-                <select>
+                <p class="article"><?php print $product['article'].' :'?></p>
+                <select class="taille" required>
+                    <option disabled selected hidden>Choisissez votre taille</option>
                 <?php
                 $tailles = explode('-', strval($product['taille']));
                 foreach ($tailles as $taille){
@@ -42,6 +49,7 @@ function display_product(){
                 ?>
                 </select>
                 <p class="price"><?php print $product['prix_vetement'].' DA'?></p>
+                <button type="button"><img src="pictures/icon/add_to_basket.png" alt="Icon Basket"></button>
             </div>
             <?php
             return ob_get_clean();
