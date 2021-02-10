@@ -125,10 +125,10 @@
     right: 20%;
     width: 40px;
     height: 40px;
-    overflow: hidden;
 }
 #main .display .product .desc button img{
     height: 100%;
+    pointer-events: none;
 }
 #main .display .product .desc button::before{
     content: 'Ajouter au panier';
@@ -151,7 +151,6 @@
     align-items: center;
 }
 #main .display .product .desc button:hover{
-    overflow: visible;
     cursor: pointer;
 }
 #main .display .product .desc button:hover::before{
@@ -159,10 +158,33 @@
 }
 #main .display .product .desc .input_surface{
     position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
 }
 #main .display .product .desc .input_surface input{
     width: 100%;
+    outline: none;
+    text-align: center;
 }
 #main .display .product .desc .input_surface span{
     position: absolute;
+    transition: 0.5s;
+    pointer-events: none;
+    font-style: italic;
+}
+#main .display .product .desc .input_surface .placeholder{
+    font-size: 0.8em;
+}
+#main .display .product .desc .input_surface .m_carre{
+    align-self: flex-end;
+    transform: translateX(-20px);
+}
+.input_surface input:focus + .placeholder, .input_surface input:valid + .placeholder{
+    transform: translateY(-120%) scale(0.8);
+}
+.button_disable{
+    background-color: #968d95;
+    pointer-events: none;
 }

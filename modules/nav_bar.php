@@ -1,7 +1,6 @@
 <?php
 ob_start();
 ?>
-<!-- NAV BAR ---------------------------------------------------- -->
 <nav id="navBar">
 	<span class="btn">&#8594;</span>
     <p class="navigation">Navigation</p>

@@ -18,10 +18,11 @@ function display_product(){
                 <span class="tissue_or_clothes" style="display: none">tissue</span>
                 <span class="id" style="display: none"><?php print $product['id_tissu']?></span>
                 <p class="label"><?php print $product['label']?></p>
+                <p class="article">Tissu :</p>
                 <div class="input_surface">
                     <input type="number" required>
                     <span class="placeholder">Entrer une surface</span>
-                    <span class="m_carre">M&#xB2;</span>
+                    <span class="m_carre">m&#xB2;</span>
                 </div>
                 <p class="price"><?php print $product['prix_unit'].' DA/m&#xB2;'?></p>
                 <button type="button"><img src="pictures/icon/add_to_basket.png" alt="Icon Basket"></button>
@@ -54,12 +55,36 @@ function display_product(){
             <?php
             return ob_get_clean();
     }
+    return null;
+}
+
+// DECLARE ARRAY OF PANIER
+$panier = [];
+
+function add_tissue_to_panier(){
+    global $panier;
+    $panier += ['tissue_or_clothes'=>'tissue', 'id'=>$_POST['id'], 'label'=>$_POST['label'],
+                'surface'=>$_POST['surface']];
+    return json_encode(['status'=>'true']);
+}
+
+function add_clothes_to_panier(){
+    global $panier;
+    $panier += ['tissue_or_clothes'=>'clothes', 'id'=>$_POST['id'], 'label'=>$_POST['label'],
+                'article'=>$_POST['article'], 'taille'=>$_POST['taille']];
+    return json_encode(['status'=>'true']);
 }
 
 function main(){
     switch ($_POST['target']){
         case 'display_product':
             echo display_product();
+            break;
+        case 'add_tissue_to_panier':
+            echo add_tissue_to_panier();
+            break;
+        case 'add_clothes_to_panier':
+            echo add_clothes_to_panier();
             break;
     }
 }
