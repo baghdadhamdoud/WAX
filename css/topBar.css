@@ -25,10 +25,10 @@
     display: none;
 }
 /*PANIER*/
-#topBar .panier-topbar img{
+#topBar .panier img{
     width: 30px;
 }
-#topBar .panier-topbar img:hover{
+#topBar .panier img:hover{
     cursor: pointer;
 }
 /*CONNEXION*/

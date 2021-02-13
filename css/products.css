@@ -1,3 +1,4 @@
+/* ULTIMATE CONTAINER */
 #main{
     width: 100%;
     position: relative;
@@ -6,6 +7,8 @@
     align-items: center;
     flex-direction: column;
 }
+/* BIG CONTAINER --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------------- */
 #container-products{
     width: 80%;
     display: flex;
@@ -14,6 +17,7 @@
     align-items: center;
     justify-content: space-evenly;
 }
+/* THE PRODUCT : CLOTHES OR TISSUE */
 #container-products .product{
     width: 45%;
     display: flex;
@@ -27,6 +31,13 @@
     transform: translateY(-10px);
     cursor: pointer;
 }
+/* PRODUCT : IMAGE */
+#container-products .product .img{
+    width: 100%;
+    box-shadow: 5px 5px 10px 0 black;
+    pointer-events: none;
+}
+/* PRODUCT : DESCRIPTION / INFORMATION ABOUT */
 #container-products .product .desc{
     width: 100%;
     margin-top: 5px;
@@ -36,19 +47,15 @@
     flex-direction: column;
     pointer-events: none;
 }
-#container-products .product .desc .id, #container-products .product .desc .tissue_or_clothes{
-    display: none;
-}
-#container-products .product .img{
-    width: 100%;
-    box-shadow: 5px 5px 10px 0 black;
-    pointer-events: none;
-}
+/*#container-products .product .desc .id, #container-products .product .desc .tissue_or_clothes{*/
+/*    display: none;*/
+/*}*/
 #container-products .product .desc p{
     margin: 2px 0 2px 0;
     font-weight: bold;
 }
-/* DISPLAY ---------------------------------------------- */
+/* DISPLAY PRODUCT ---------------------------------------------- */
+/* ------------------------------------------------------------------------ */
 #main .display{
     position: fixed;
     top: 0;
@@ -62,13 +69,7 @@
     flex-direction: column;
 
 }
-#main .display .outer{
-    width: 100%;
-    height: 100%;
-    opacity: 0.8;
-    background-color: black;
-    position: absolute;
-}
+/* PRODUCT DISPLAY */
 #main .display .product{
     z-index: 2;
     background-color: rgba(255,255,255,1);
@@ -80,6 +81,15 @@
     flex-direction: column;
     position: relative;
 }
+/* OUTER : FOR EXIT */
+#main .display .outer{
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+    background-color: black;
+    position: absolute;
+}
+/* EXIT BUTTON */
 #main .display .product .exit{
     position: absolute;
     font-size: 1.5em;
@@ -93,9 +103,11 @@
     font-weight: bold;
     cursor: pointer;
 }
+/* IMAGE */
 #main .display .product img{
     width: 90%;
 }
+/* INFORMATION / DESCRIPTION*/
 #main .display .product .desc{
     font-weight: bold;
     width: 90%;
@@ -114,6 +126,35 @@
 #main .display .product .desc select, #main .display .product .desc .input_surface{
     width: 30%;
 }
+#main .display .product .desc .input_surface{
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+}
+#main .display .product .desc .input_surface input{
+    width: 100%;
+    outline: none;
+    text-align: center;
+}
+#main .display .product .desc .input_surface span{
+    position: absolute;
+    transition: 0.5s;
+    pointer-events: none;
+    font-style: italic;
+}
+#main .display .product .desc .input_surface .placeholder{
+    font-size: 0.8em;
+}
+#main .display .product .desc .input_surface .m_carre{
+    align-self: flex-end;
+    transform: translateX(-20px);
+}
+.input_surface input:focus + .placeholder, .input_surface input:valid + .placeholder{
+    transform: translateY(-120%) scale(0.8);
+}
+/* BUTTON : ADD TO PANIER */
 #main .display .product .desc button{
     border-radius: 50%;
     outline: none;
@@ -156,35 +197,11 @@
 #main .display .product .desc button:hover::before{
     width: 150px;
 }
-#main .display .product .desc .input_surface{
-    position: relative;
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: column;
-    align-items: center;
-}
-#main .display .product .desc .input_surface input{
-    width: 100%;
-    outline: none;
-    text-align: center;
-}
-#main .display .product .desc .input_surface span{
+/* NOTIFICATION ABOUT ADDED PRODUCT TO PANIER */
+#main .display .product .desc .added{
     position: absolute;
-    transition: 0.5s;
-    pointer-events: none;
+    bottom: 0;
+    right: 0;
     font-style: italic;
-}
-#main .display .product .desc .input_surface .placeholder{
-    font-size: 0.8em;
-}
-#main .display .product .desc .input_surface .m_carre{
-    align-self: flex-end;
-    transform: translateX(-20px);
-}
-.input_surface input:focus + .placeholder, .input_surface input:valid + .placeholder{
-    transform: translateY(-120%) scale(0.8);
-}
-.button_disable{
-    background-color: #968d95;
-    pointer-events: none;
+    font-weight: normal;
 }

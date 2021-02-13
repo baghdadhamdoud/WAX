@@ -11,8 +11,8 @@ function get_tissue(){
         <div class="product">
             <img class="img" src="<?php print $tissue['path_photo'] ?>" alt="Photo du Tissu">
             <div class="desc">
-                <span class="tissue_or_clothes">tissue</span>
-                <span class="id"><?php print $id_tissue?></span>
+                <span class="tissue_or_clothes" style="display: none">tissue</span>
+                <span class="id" style="display: none"><?php print $id_tissue?></span>
                 <p class="title"><?php print $tissue['label']?></p>
                 <p class="price"><?php print $tissue['prix_unit'].' DA/m&#xB2; '?></p>
             </div>
@@ -35,8 +35,8 @@ function get_clothes(){
         <div class="product">
             <img class="img" src="<?php print $clothe['path_photo'] ?>" alt="Photo du Vêtement">
             <div class="desc">
-                <span class="tissue_or_clothes">clothes</span>
-                <span class="id"><?php print $id_clothe?></span>
+                <span class="tissue_or_clothes" style="display: none">clothes</span>
+                <span class="id" style="display: none"><?php print $id_clothe?></span>
                 <p class="title"><?php print $clothe['label']?></p>
                 <p class="price"><?php print $clothe['prix_vetement'].' DA'?></p>
             </div>
