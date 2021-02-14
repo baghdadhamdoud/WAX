@@ -1,8 +1,15 @@
 <?php
-$panier_tissue = '';
-$panier_clothes = '';
+$panier_tissue = [];
+$panier_clothes = [];
 $tissue_count = 1;
 $clothes_count = 1;
+
+function debug_to_console($data) {
+    $output = $data;
+    if (is_array($output))
+        $output = implode(',', $output);
+    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+}
 
 function init_panier(){
     global $panier_tissue, $panier_clothes;
@@ -16,8 +23,7 @@ function init_panier(){
         <td>Button</td>
     </tr>
     <?php
-    $panier_tissue = ob_get_clean();
-
+    array_push($panier_tissue, ob_get_clean());
     ob_start();
     ?>
     <tr class="titles">
@@ -29,7 +35,7 @@ function init_panier(){
         <td>Button</td>
     </tr>
     <?php
-    $panier_clothes = ob_get_clean();
+    array_push($panier_clothes, ob_get_clean());
 }
 
 function add_tissue_to_panier(){
@@ -51,7 +57,7 @@ function add_tissue_to_panier(){
     <?php
     $tissue_count ++;
     $t = ob_get_clean() . '</br>';
-    $panier_tissue = $panier_tissue.$t;
+    array_push($panier_tissue, $t);
     return json_encode(['status'=>'true']);
 }
 
@@ -74,13 +80,14 @@ function add_clothes_to_panier(){
     <?php
     $clothes_count++;
     $c = ob_get_clean() . '</br>';
-    $panier_clothes = $panier_clothes.$c;
+    debug_to_console($c);
+    array_push($panier_clothes, $c);
     return json_encode(['status'=>'true']);
 }
 
 function display_panier(){
     global $panier_tissue, $panier_clothes;
-    return json_encode(['status'=>'true', 'tissue'=>$panier_tissue, 'clothes'=>$panier_clothes]);
+    return json_encode(['status'=>'true', 'tissue'=>join('', $panier_tissue), 'clothes'=>join('', $panier_clothes)]);
 }
 
 function main(){

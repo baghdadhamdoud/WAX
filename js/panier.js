@@ -67,8 +67,8 @@ function Panier() {
             panier.hand_of_my_db(data_php, 'json').done(function (r,s) {
                 console.log(r);
                 if(r['status'] === 'true'){
-                    $('#panier_container .panier .summary .table.tissue').html(r['tissue']);
-                    $('#panier_container .panier .summary .table.clothes').html(r['clothes']);
+                    $('#panier_container .panier .summary table.tissue').append(r['tissue']);
+                    $('#panier_container .panier .summary table.clothes').append(r['clothes']);
                     $('#panier_container').show('slow');
                 }
             });
