@@ -37,10 +37,11 @@ function Panier() {
                         return null;
                     }
                     data_php = {target:'add_tissue_to_panier', id:id, label:label, surface:surface, price:price};
-                    panier.hand_of_my_db(data_php, 'json').done(function (r,s) {
-                        if (r['status'] === 'true'){
-                            action();
-                        }
+                    panier.hand_of_my_db(data_php, false).done(function (r,s) {
+                        console.log(s);                    
+                        // if (r['status'] === 'true'){
+                        //     action();
+                        // }
                     })
                     break;
                 case 'clothes':
@@ -50,11 +51,13 @@ function Panier() {
                     }
                     let article = $('#main .display .product .desc .article').text();
                     article = String(article).split(' ')[0];
-                    data_php = {target:'add_clothes_to_panier', id:id, label:label, article:article, taille:taille, price:price};
-                    panier.hand_of_my_db(data_php, 'json').done(function (r,s) {
-                        if (r['status'] === 'true'){
-                            action();
-                        }
+                    data_php = {target:'add_clothes_to_panier', id:String(id), label:String(label), 
+                                article:String(article), taille:String(taille), price:String(price)};                  
+                    panier.hand_of_my_db(data_php, false).done(function (r,s) {
+                        console.log(s);
+                        // if (r['status'] === 'true'){
+                        //     action();
+                        // }
                     })
                     break;
             }
@@ -63,14 +66,14 @@ function Panier() {
 
     this.set_panier = function () {
         $(document).on('click', '#topBar .panier', function () {
-            const data_php = {target:'display_panier'};
+            const data_php = {target:'get_panier'};
             panier.hand_of_my_db(data_php, 'json').done(function (r,s) {
                 console.log(r);
-                if(r['status'] === 'true'){
-                    $('#panier_container .panier .summary table.tissue').append(r['tissue']);
-                    $('#panier_container .panier .summary table.clothes').append(r['clothes']);
-                    $('#panier_container').show('slow');
-                }
+                // if(r['status'] === 'true'){
+                //     $('#panier_container .panier .summary table.tissue').append(r['tissue']);
+                //     $('#panier_container .panier .summary table.clothes').append(r['clothes']);
+                //     $('#panier_container').show('slow');
+                // }
             });
         });
         $(document).on('click', '#panier_container .summary .exit, #panier_container .outer', function () {
@@ -85,6 +88,7 @@ function Panier() {
         this.set_panier();
     }
 }
+
 console.log('PANIER');
 let panier = new Panier();
 panier.main();
