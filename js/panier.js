@@ -2,13 +2,14 @@ function Panier() {
     let panier = this;
 
     // AJAX ----------------------------------------------------------------------------------------------
-    this.hand_of_my_db = function (data, dataType) {
+    this.hand_of_my_db = function (data) {
         return $.ajax({
             url: 'php_backend/controller/panier.php',
             type: 'POST',
-            dataType: dataType,
+            dataType: 'json',
             data: data,
             error: function (r, s, e) {
+                console.log(data);                
                 console.log(e);
             }
         })
@@ -37,7 +38,7 @@ function Panier() {
                         return null;
                     }
                     data_php = {target:'add_tissue_to_panier', id:id, label:label, surface:surface, price:price};
-                    panier.hand_of_my_db(data_php, false).done(function (r,s) {
+                    panier.hand_of_my_db(data_php).done(function (r,s) {
                         console.log(s);                    
                         // if (r['status'] === 'true'){
                         //     action();
@@ -51,9 +52,10 @@ function Panier() {
                     }
                     let article = $('#main .display .product .desc .article').text();
                     article = String(article).split(' ')[0];
-                    data_php = {target:'add_clothes_to_panier', id:String(id), label:String(label), 
-                                article:String(article), taille:String(taille), price:String(price)};                  
-                    panier.hand_of_my_db(data_php, false).done(function (r,s) {
+                    // data_php = {target:'add_clothes_to_panier', id:id, label:label, 
+                    //             article:article, taille:taille, price:price};    
+                    data_php = {target:'add_clothes_to_panier'};                                
+                    panier.hand_of_my_db(data_php).done(function (r,s) {
                         console.log(s);
                         // if (r['status'] === 'true'){
                         //     action();
@@ -67,7 +69,7 @@ function Panier() {
     this.set_panier = function () {
         $(document).on('click', '#topBar .panier', function () {
             const data_php = {target:'get_panier'};
-            panier.hand_of_my_db(data_php, 'json').done(function (r,s) {
+            panier.hand_of_my_db(data_php).done(function (r,s) {
                 console.log(r);
                 // if(r['status'] === 'true'){
                 //     $('#panier_container .panier .summary table.tissue').append(r['tissue']);

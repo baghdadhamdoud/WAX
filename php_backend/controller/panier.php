@@ -1,11 +1,6 @@
 <?php
-$panier_tissue = [];
-$panier_clothes = [];
-$tissue_count = 1;
-$clothes_count = 1;
 
 function init_panier(){
-    global $panier_tissue , $panier_clothes ;
     ob_start();
     ?>
     <tr class="titles">
@@ -16,7 +11,7 @@ function init_panier(){
         <td>Button</td>
     </tr>
     <?php
-    array_push($panier_tissue, ob_get_clean());
+    array_push($_SESSION['panier_tissue'], ob_get_clean());
     ob_start();
     ?>
     <tr class="titles">
@@ -28,19 +23,30 @@ function init_panier(){
         <td>Button</td>
     </tr>
     <?php
-    array_push($panier_clothes, ob_get_clean());
+    array_push($_SESSION['panier_clothes'], ob_get_clean());
+}
+
+function check_if_session_panier_exists(){
+    if(!isset($_SESSION['panier_tissue']) || !isset($_SESSION['panier_clothes']) ||
+        !isset($_SESSION['tissue_count']) || !isset($_SESSION['clothes_count'])){
+        $_SESSION['panier_tissue'] = array();
+        $_SESSION['panier_clothes'] = array();
+        $_SESSION['tissue_count'] = 1;
+        $_SESSION['clothes_count'] = 1;
+        init_panier();
+    }
 }
 
 function add_tissue_to_panier(){
-    global $panier_tissue , $tissue_count;
     if(!isset($_POST['id']) || !isset($_POST['label']) || !isset($_POST['surface']) || !isset($_POST['price'])){
         return json_encode(['status'=>'false']);
     }
+    check_if_session_panier_exists();
     ob_start();
     ?>
     <tr>
         <td></td>
-        <td><?php print $tissue_count ?></td>
+        <td><?php print $_SESSION['tissue_count'] ?></td>
         <td class="id" style="display: none"> <?php print $_POST['id'] ?></td>
         <td class="label"> <?php print $_POST['label'] ?></td>
         <td class="surface"> <?php print $_POST['surface'] ?> </td>
@@ -48,65 +54,59 @@ function add_tissue_to_panier(){
         <td class="button">X</td>
     </tr>
     <?php
-    array_push($panier_tissue, ob_get_clean());
-    $tissue_count ++;
-    // return json_encode(['status'=>'true']);
+    if(isset($_SESSION['panier_tissue']) && isset($_SESSION['tissue_count'])){
+        array_push($_SESSION['panier_tissue'], ob_get_clean());
+        $_SESSION['tissue_count'] ++;
+        return json_encode(['status'=>'true']);
+    }
+    return json_encode(['status'=>'false']);
 }
 
 function add_clothes_to_panier(){
-    global $panier_clothes, $clothes_count;
     if(!isset($_POST['id']) || !isset($_POST['label']) || !isset($_POST['article']) || !isset($_POST['taille']) || !isset($_POST['price'])){
-        // return json_encode(['status'=>'false']);
+        return json_encode(['status'=>'false']);
     }
-    $id = $_POST['id'];
-    $article = $_POST['article'];
-    $label = $_POST['label'];
-    $taille = $_POST['taille'];
-    $price = $_POST['price'];
-
-    $c = '<tr>
-            <td>'.$clothes_count.'</td>
-            <td class="id" style="display: none">'.$id.'</td>
-            <td class="article">'.$article.'</td>
-            <td class="label">'.$label.'</td>
-            <td class="taille">'.$taille.'</td>
-            <td class="price">'.$price.'</td>
-            <td class="button">X</td> </tr>';
-
-    // return json_encode(['c'=>$c]);
-    $clothes_count ++;
-    array_push($panier_clothes, $c);
-    // return json_encode(['status'=>'false']);
+    check_if_session_panier_exists();
+    ob_start();
+    ?>
+    <tr>
+        <td></td>
+        <td><?php print $_SESSION['clothes_count'] ?></td>
+        <td class="id" style="display: none"> <?php print $_POST['id'] ?></td>
+        <td class="article"><?php print $_POST['article'] ?></td>
+        <td class="label"> <?php print $_POST['label'] ?></td>
+        <td class="taille"> <?php print $_POST['taille'] ?> </td>
+        <td class="price"> <?php print $_POST['price'] ?> </td>
+        <td class="button">X</td>
+    </tr>
+    <?php
+    if(isset($_SESSION['panier_clothes']) && isset($_SESSION['clothes_count'])){
+        array_push($_SESSION['panier_clothes'], ob_get_clean());
+        $_SESSION['clothes_count'] ++;
+        return json_encode(['status'=>'true']);
+    }
+    return json_encode(['status'=>'false']);
 }
 
 function get_panier(){
-    global $panier_tissue , $panier_clothes;
-    return json_encode(['status'=>'true', 'tissue'=>$panier_tissue, 'clothes'=>$panier_clothes]);
+    return json_encode(['status'=>'true', 'tissue'=>$_SESSION['panier_tissue'], 'clothes'=>$_SESSION['panier_clothes']]);
 }
 
-function main(){
-    init_panier();
-    if(!isset($_POST['target'])){
-        return null;
-    }
+function main(){    
+    session_start();
     switch ($_POST['target']){
         case 'add_tissue_to_panier':
-            add_tissue_to_panier();
+            // echo add_tissue_to_panier();
+            echo json_encode(['status'=>'false']); 
             break;
         case 'add_clothes_to_panier':
-            add_clothes_to_panier();
+            // echo add_clothes_to_panier();
+            echo json_encode(['status'=>'false']);
+            // echo '<p>Baghdad</p>';
             break;
         case 'get_panier':
             echo get_panier();
             break;
-        case 'get_panier_tissue':
-            echo get_panier_tissue();
     }
 }
-
 main();
-// session_start();
-// init_panier();
-// add_clothes_to_panier();
-// add_clothes_to_panier();
-// echo json_encode(get_panier());
