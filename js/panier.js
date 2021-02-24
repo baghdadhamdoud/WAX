@@ -39,27 +39,27 @@ function Panier() {
                     }
                     data_php = {target:'add_tissue_to_panier', id:id, label:label, surface:surface, price:price};
                     panier.hand_of_my_db(data_php).done(function (r,s) {
-                        console.log(s);                    
-                        // if (r['status'] === 'true'){
-                        //     action();
-                        // }
+                        // console.log(r);
+                        if (r['status'] === 'true : "Tissu" ajouté'){
+                            action();
+                        }
                     })
                     break;
                 case 'clothes':
                     const taille = $('#main .display .product .desc select').val();
-                    if(taille === null){
+                    const qtt = $('#main .display .product .desc .input_qtt input').val();
+                    if(taille === null || qtt === null){
                         return null;
                     }
                     let article = $('#main .display .product .desc .article').text();
                     article = String(article).split(' ')[0];
-                    // data_php = {target:'add_clothes_to_panier', id:id, label:label, 
-                    //             article:article, taille:taille, price:price};    
-                    data_php = {target:'add_clothes_to_panier'};                                
+                    data_php = {target:'add_clothes_to_panier', id:id, label:label, 
+                                article:article, taille:taille, qtt:qtt, price:price};
                     panier.hand_of_my_db(data_php).done(function (r,s) {
-                        console.log(s);
-                        // if (r['status'] === 'true'){
-                        //     action();
-                        // }
+                        // console.log(r);
+                        if (r['status'] === 'true : "Vêtement" ajouté'){
+                            action();
+                        }
                     })
                     break;
             }
@@ -70,15 +70,21 @@ function Panier() {
         $(document).on('click', '#topBar .panier', function () {
             const data_php = {target:'get_panier'};
             panier.hand_of_my_db(data_php).done(function (r,s) {
-                console.log(r);
-                // if(r['status'] === 'true'){
-                //     $('#panier_container .panier .summary table.tissue').append(r['tissue']);
-                //     $('#panier_container .panier .summary table.clothes').append(r['clothes']);
-                //     $('#panier_container').show('slow');
-                // }
+                // console.log(r);
+                if(r['status'] === 'true'){
+                    if(r['status_tissue'] === 'yes'){
+                        $('#panier_container .panier .summary .tissue table').append(r['tissue'], r['price_tissue']);
+                        $('#panier_container .panier .summary .tissue').show();
+                    }
+                    if(r['status_clothes'] === 'yes'){
+                        $('#panier_container .panier .summary .clothes table').append(r['clothes'], r['price_clothes']);
+                        $('#panier_container .panier .summary .clothes').show();
+                    }
+                    $('#panier_container').show('slow');
+                }
             });
         });
-        $(document).on('click', '#panier_container .summary .exit, #panier_container .outer', function () {
+        $(document).on('click', '#panier_container .panier .exit, #panier_container .outer', function () {
             $('#panier_container').hide('slow');
             $('#panier_container .summary table *').remove();
         });

@@ -4,15 +4,22 @@ ob_start();
 <div id="panier_container">
     <div class="outer"></div>
     <div class="panier">
-        <p class="title">Panier</p>
+        <p class="title">Mon Panier</p>
         <span class="exit">X</span>
         <div class="summary">
-            <table class="tissue">
-            </table>
-            <table class="clothes">
-            </table>
+            <div class="tissue" style="display: none">
+                <p>Tissus</p>
+                <table></table>
+            </div>
+            <div class="clothes" style="display: none">
+                <p>Vêtements</p>
+                <table></table>
+            </div>
         </div>
-        <button type="button">Commander</button>
+        <div>
+            <button type="button">Vider le Panier</button>
+            <button type="button">Commander</button>
+        </div>
     </div>
 </div>
 <?php

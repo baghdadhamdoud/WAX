@@ -50,6 +50,10 @@ function display_product(){
                 }
                 ?>
                 </select>
+                <div class="input_qtt">
+                    <input type="number" required>
+                    <span class="placeholder">Entrer une quantité</span>
+                </div>
                 <p class="price"><?php print $product['prix_vetement'].' DA'?></p>
                 <button type="button"><img src="pictures/icon/add_to_basket.png" alt="Icon Basket"></button>
                 <p class="added" style="display: none">Vêtement ajouté au panier</p>
