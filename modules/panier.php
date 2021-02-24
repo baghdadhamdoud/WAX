@@ -16,9 +16,9 @@ ob_start();
                 <table></table>
             </div>
         </div>
-        <div>
-            <button type="button">Vider le Panier</button>
-            <button type="button">Commander</button>
+        <div class="btns">
+            <button type="button" class="vider_panier">Vider le Panier</button>
+            <button type="button" class="commander">Commander</button>
         </div>
     </div>
 </div>

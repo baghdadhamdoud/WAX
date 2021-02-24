@@ -62,7 +62,7 @@ function add_tissue_to_panier(){
         <td class="label"> <?php print $_POST['label'] ?></td>
         <td class="surface"> <?php print $_POST['surface'] ?> </td>
         <td class="price"> <?php print $price.' DA' ?> </td>
-        <td class="button">X</td>
+        <td class="delete">X</td>
     </tr>
     <?php
     if(isset($_SESSION['panier_tissue']) && isset($_SESSION['price_tissue'])){
@@ -88,7 +88,7 @@ function add_clothes_to_panier(){
         <td class="taille"> <?php print $_POST['taille'] ?> </td>
         <td class="qtt"> <?php print $_POST['qtt'] ?> </td>
         <td class="price"> <?php print $price.' DA' ?> </td>
-        <td class="button">X</td>
+        <td class="delete">X</td>
     </tr>
     <?php
     if(isset($_SESSION['panier_clothes']) && isset($_SESSION['price_clothes'])){
@@ -115,6 +115,7 @@ function formate_price_clothes(){
     ob_start();
     ?>
     <tr>
+        <td></td>
         <td></td>
         <td></td>
         <td class="total total_title">Total</td>
@@ -145,6 +146,18 @@ function get_panier(){
     return json_encode(['status'=>'false : ERROR']);
 }
 
+function clear_panier(){
+    if(isset($_SESSION['panier_tissue'])){
+        unset($_SESSION['panier_tissue']);
+        unset($_SESSION['price_tissue']);
+    }
+    if(isset($_SESSION['panier_clothes'])){
+        unset($_SESSION['panier_clothes']);
+        unset($_SESSION['price_clothes']);
+    }
+    return json_encode(['status'=>'true']);
+}
+
 function main(){    
     session_start();
     switch ($_POST['target']){
@@ -156,6 +169,9 @@ function main(){
             break;
         case 'get_panier':
             echo get_panier();
+            break;
+        case 'clear_panier':
+            echo clear_panier();
             break;
     }
 }

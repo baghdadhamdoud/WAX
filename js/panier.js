@@ -80,13 +80,24 @@ function Panier() {
                         $('#panier_container .panier .summary .clothes table').append(r['clothes'], r['price_clothes']);
                         $('#panier_container .panier .summary .clothes').show();
                     }
-                    $('#panier_container').show('slow');
                 }
+                $('#panier_container').show('slow');
             });
         });
         $(document).on('click', '#panier_container .panier .exit, #panier_container .outer', function () {
             $('#panier_container').hide('slow');
             $('#panier_container .summary table *').remove();
+        });
+        $(document).on('click', '#panier_container .panier .btns .vider_panier', function () {
+            const data_php = {target:'clear_panier'};
+            panier.hand_of_my_db(data_php).done(function (r,s) {
+                if(r['status'] === 'true'){
+                    $('#panier_container .panier .summary div').hide('slow');
+                }
+            })
+        });
+        $(document).on('click', '#panier_container .panier .summary div table tr td.delete', function (e) {
+            console.log('Il');
         });
     }
 

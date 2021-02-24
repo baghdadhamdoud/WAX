@@ -25,17 +25,19 @@
     position: relative;
     background-color: rgba(255,255,255,1);
     width: 80%;
-    height: 80%;
+    max-height: 80%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    padding: 3% 0 3% 0;
 }
 /*TITLE OF PANIER ---------------------------------- */
 #panier_container .panier p.title{
     font-weight: bold;
     font-size: 2em;
     text-shadow: 0 0 1px black;
+    margin-bottom: 2%;
 }
 /*EXIT'S PANIER ------------------------------------ */
 #panier_container .panier .exit{
@@ -54,7 +56,7 @@
 /* SUMMARY : CONTAINER OF TABLE'S DIV ------------------------------------------------------------------ */
 #panier_container .panier .summary{
     /*background-color: #968d95;*/
-    min-width: 90%;
+    min-width: 98%;
     min-height: 80%;
     display: flex;
     flex-direction: column;
@@ -71,6 +73,7 @@
 }
 #panier_container .panier .summary div p{
     font-weight: bold;
+    font-size: 1.3em;
     margin-bottom: 10px;
 }
 #panier_container .panier .summary div table{
@@ -93,9 +96,35 @@
     font-weight: bold;
     text-shadow: 0 0 1px black;
 }
+#panier_container .panier .summary div table tr td.delete{
+    transition: 0.3s;
+}
+#panier_container .panier .summary div table tr td.delete:hover{
+    background-color: #585157;
+    /*transform: rotateZ(180deg);*/
+    cursor: pointer;
+}
 #panier_container .panier .summary .tissue table tr td{
     width: 20%;
 }
 #panier_container .panier .summary .clothes table tr td{
     width: 16%;
+}
+/* BUTTONS ---------------------------------------------------------------------- */
+#panier_container .panier .btns{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+#panier_container .panier .btns button{
+    border: none;
+    outline: none;
+    background-color: #3b353a;
+    color: #E8DFD8;
+    padding: 10px;
+}
+#panier_container .panier .btns button:hover{
+    cursor: pointer;
 }
