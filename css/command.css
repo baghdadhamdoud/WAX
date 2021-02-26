@@ -1,0 +1,58 @@
+/*COMMAND CONTAINER -------------------------------------*/
+#panier_command_container .command{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 60%;
+    height: 50%;
+    padding: 3% 0 3% 0;
+    z-index: 3;
+    position: relative;
+    background-color: rgba(255,255,255,1);
+}
+/*TITLE OF COMMAND ---------------------------------- */
+#panier_command_container .command p.title{
+    font-weight: bold;
+    font-size: 2em;
+    text-shadow: 0 0 1px black;
+    margin-bottom: 2%;
+}
+/*EXIT'S COMMAND ------------------------------------ */
+#panier_command_container .command .exit{
+    position: absolute;
+    font-size: 1.5em;
+    top: 5px;
+    right: 5px;
+    transition: 0.5s;
+    padding: 5px;
+}
+#panier_command_container .command .exit:hover{
+    transform: rotate(180deg);
+    font-weight: bold;
+    cursor: pointer;
+}
+/*INFOS ---------------------------------------------------- */
+#panier_command_container .command .infos{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 95%;
+    height: 70%;
+}
+#panier_command_container .command .infos div{
+    height: 30%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+#panier_command_container .command .infos .btns{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+}

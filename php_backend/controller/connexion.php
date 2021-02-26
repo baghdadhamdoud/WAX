@@ -17,7 +17,8 @@ function check_password(){
     return false;
 }
 
-function save_user_session($usename,$nom,$prenom,$genre,$email,$telephone){
+function save_user_session($id_user, $usename,$nom,$prenom,$genre,$email,$telephone){
+    $_SESSION['id_user'] = $id_user;
     $_SESSION['username'] = $usename;
     $_SESSION['nom'] = $nom;
     $_SESSION['prenom'] = $prenom;
@@ -75,7 +76,7 @@ function connexion_treatment(){
     if($user['password'] != $password){
         return json_encode(['status'=>'false', 'response'=>'Votre Mot de Passe est erroné']);
     }
-    save_user_session($username, $user['nom'], $user['prenom'],$user['genre'], $user['email'], $user['telephone']);
+    save_user_session($user['id_user'], $username, $user['nom'], $user['prenom'],$user['genre'], $user['email'], $user['telephone']);
     return json_encode(['status'=>'true', 'nom'=>$user['nom'], 'prenom'=>$user['prenom']]);
 }
 

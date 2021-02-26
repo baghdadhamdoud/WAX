@@ -47,16 +47,19 @@ function Panier() {
                     break;
                 case 'clothes':
                     const taille = $('#main .display .product .desc select').val();
-                    const qtt = $('#main .display .product .desc .input_qtt input').val();
-                    if(taille === null || qtt === null){
+                    let qtt = $('#main .display .product .desc .input_qtt input').val();
+                    if(taille === null){
+                        alert('Veillez entrer une taille pour le vêtement !');
                         return null;
+                    }
+                    if(qtt === ''){
+                        qtt = 1;
                     }
                     let article = $('#main .display .product .desc .article').text();
                     article = String(article).split(' ')[0];
-                    data_php = {target:'add_clothes_to_panier', id:id, label:label, 
+                    data_php = {target:'add_clothes_to_panier', id:id, label:label,
                                 article:article, taille:taille, qtt:qtt, price:price};
                     panier.hand_of_my_db(data_php).done(function (r,s) {
-                        // console.log(r);
                         if (r['status'] === 'true : "Vêtement" ajouté'){
                             action();
                         }
@@ -67,44 +70,98 @@ function Panier() {
     }
 
     this.set_panier = function () {
+        // DISPLAY PANIER
         $(document).on('click', '#topBar .panier', function () {
             const data_php = {target:'get_panier'};
             panier.hand_of_my_db(data_php).done(function (r,s) {
-                // console.log(r);
                 if(r['status'] === 'true'){
                     if(r['status_tissue'] === 'yes'){
-                        $('#panier_container .panier .summary .tissue table').append(r['tissue'], r['price_tissue']);
-                        $('#panier_container .panier .summary .tissue').show();
+                        $('#panier_command_container .panier .summary .tissue table').append(r['tissue']);
+                        $('#panier_command_container .panier .summary .tissue').show();
                     }
                     if(r['status_clothes'] === 'yes'){
-                        $('#panier_container .panier .summary .clothes table').append(r['clothes'], r['price_clothes']);
-                        $('#panier_container .panier .summary .clothes').show();
+                        $('#panier_command_container .panier .summary .clothes table').append(r['clothes']);
+                        $('#panier_command_container .panier .summary .clothes').show();
                     }
                 }
-                $('#panier_container').show('slow');
+                $('#panier_command_container').show('slow');
             });
         });
-        $(document).on('click', '#panier_container .panier .exit, #panier_container .outer', function () {
-            $('#panier_container').hide('slow');
-            $('#panier_container .summary table *').remove();
+        // EXIT PANIER AND COMMAND ***************************
+        $(document).on('click', '#panier_command_container .panier .exit, #panier_command_container .outer', function () {
+            $('#panier_command_container').hide('slow', function () {
+                $('#panier_command_container .summary div table *').remove();
+                let panier = $('#panier_command_container .panier');
+                if(panier.is(':hidden')){
+                    panier.show();
+                }
+            });
         });
-        $(document).on('click', '#panier_container .panier .btns .vider_panier', function () {
+        // CLEAR PANIER
+        $(document).on('click', '#panier_command_container .panier .btns .vider_panier', function () {
             const data_php = {target:'clear_panier'};
             panier.hand_of_my_db(data_php).done(function (r,s) {
                 if(r['status'] === 'true'){
-                    $('#panier_container .panier .summary div').hide('slow');
+                    $('#panier_command_container .panier .summary div').hide('slow');
                 }
             })
         });
-        $(document).on('click', '#panier_container .panier .summary div table tr td.delete', function (e) {
-            console.log('Il');
+        // DELETE FROM PANIER
+        $(document).on('click', '#panier_command_container .panier .summary div table tr td.delete', function (e) {
+            const tissue_or_clothes = $(e.target).parent().parent().parent().prop('class');
+            const id = $(e.target).parent().find('td.id').text();
+            const data_php = {target:'delete_from_panier', tissue_or_clothes:tissue_or_clothes, id:parseInt(id)};
+            panier.hand_of_my_db(data_php).done(function (r,s) {
+                if(r['status'] === 'true'){
+                    if(r['empty'] === 'yes'){
+                        $(e.target).parent().parent().parent().hide('slow');
+                    }
+                    else{
+                        $(e.target).parent().hide('slow');
+                        $(e.target).parent().parent().find('tr td.total_number').text(String(r['newPriceTotal'] +' DA'));
+                    }
+                }
+            })
+        });
+    }
+
+    this.set_btn_commander = function () {
+        $(document).on('click', '#panier_command_container .panier .btns .commander', function () {
+            const data_php = {target:'check_if_user_is_connected'};
+            panier.hand_of_my_db(data_php).done(function (r) {
+                if(r['status'] === 'true'){
+                    console.log('Il y a un user !');
+                    $.ajax({
+                        url: 'php_backend/controller/command.php',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {target:'init_command'},
+                        error: function (r, s, e) {
+                            console.log({target:'init_command'});
+                            console.log(e);
+                        }
+                    }).done(function (r) {
+                        if(r['status'] === 'true'){
+                            $('#panier_command_container .command .infos .phone input').val(r['tel']);
+                            $('#panier_command_container .command .infos .address select.wilaya').append(r['wilayas']);
+                            $('#panier_command_container .panier').hide('fast', function () {
+                                $('#panier_command_container .command').show('slow');
+                            });
+                        }
+                    })
+                }
+                else{
+                    console.log('Veillez vous connecter !');
+                }
+            });
         });
     }
 
     this.main = function () {
-        $('#panier_container').hide();
+        $('#panier_command_container').hide();
         this.add_to_panier();
         this.set_panier();
+        this.set_btn_commander();
     }
 }
 

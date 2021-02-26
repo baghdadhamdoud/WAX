@@ -154,6 +154,29 @@
 .input_surface input:focus + .placeholder, .input_surface input:valid + .placeholder{
     transform: translateY(-120%) scale(0.8);
 }
+#main .display .product .desc .input_qtt{
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 30%;
+}
+#main .display .product .desc .input_qtt input{
+    width: 100%;
+    outline: none;
+    text-align: center;
+}
+#main .display .product .desc .input_qtt .placeholder{
+    font-weight: normal;
+    font-style: italic;
+    position: absolute;
+    pointer-events: none;
+    transition: 0.3s;
+    font-size: 0.9em;
+}
+.input_qtt input:focus + .placeholder, .input_qtt input:valid + .placeholder{
+    transform: translateY(-100%) scale(0.8);
+}
 /* BUTTON : ADD TO PANIER */
 #main .display .product .desc button{
     border-radius: 50%;

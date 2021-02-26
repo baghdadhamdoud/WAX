@@ -12,6 +12,8 @@
     <link href="css/connexion.css" rel="stylesheet"/>
     <!--    CSS of PANIER-->
     <link href="css/panier.css" rel="stylesheet"/>
+    <!--    CSS of COMMAND-->
+    <link href="css/command.css" rel="stylesheet"/>
     <!--    CSS of PRESENTATION-->
     <link href="css/presentation.css" rel="stylesheet"/>
     <!--    CSS of NAV-BAR-->
@@ -26,7 +28,7 @@
 <!-- SET CONNEXION-->
 <?php include 'modules/connexion.php'; ?>
 <!-- SET PANIER-->
-<?php include 'modules/panier.php';?>
+<?php include 'modules/panier_command.php';?>
 <!-- SET NAV-BAR-->
 <?php include 'modules/nav_bar.php';?>
 <!-- SET PRESENTATION -->
@@ -47,6 +49,8 @@
 <script type="text/javascript" src="js/connexion.js"></script>
 <!--    JS OF PANIER-->
 <script type="text/javascript" src="js/panier.js"></script>
+<!--    JS OF COMMAND-->
+<script type="text/javascript" src="js/command.js"></script>
 <!--    JS OF CHOICE-->
 <script type="text/javascript" src="js/choice.js"></script>
 <!--    JS OF PRODUCTS-->
