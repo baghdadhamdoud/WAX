@@ -49,10 +49,51 @@
     justify-content: space-evenly;
     align-items: center;
 }
-#panier_command_container .command .infos .btns{
+#panier_command_container .command .infos .phone input{
+    text-align: center;
+}
+/* BUTTONS ---------------------------------------------------------------------- */
+#panier_command_container .command .btns{
+    width: 50%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
-    width: 50%;
+}
+#panier_command_container .command .btns button{
+    border: none;
+    outline: none;
+    background-color: #3b353a;
+    color: #E8DFD8;
+    padding: 10px;
+}
+#panier_command_container .command .btns button:hover{
+    cursor: pointer;
+}
+/* ALERT COMMAND VALIDATED --------------------------------------------------*/
+#panier_command_container .alert_command_validated{
+    position: absolute;
+    width: 500px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #2b2b2b;
+    color: #E8DFD8;
+    z-index: 4;
+    padding: 20px 10px 0 10px;
+    transform: translateX(-350%);
+}
+#panier_command_container .alert_command_validated p{
+    font-size: 0.9em;
+}
+/*TREATMENT ---------------------------------------------------------------- */
+.alert{
+    animation: alert_animate 1s 3 forwards;
+}
+@keyframes alert_animate {
+    0%{background-color: #E8DFD8; color: black}
+    50%{background-color: darkred; color: #E8DFD8}
+    100%{background-color: #E8DFD8; color: black}
 }

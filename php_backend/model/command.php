@@ -1,24 +1,6 @@
 <?php
 require '../connexion_to_db.php';
 
-function insert_commandes_tissues($tissues, $id_user_fk, $date, $heure, $id_adresse_fk){
-    global $conn;
-    foreach ($tissues as $id => $tissue) {
-        try {
-            $stmt = $conn->prepare("insert into commander_tissu (id_tissu_fk, id_user_fk, date, heure, surface, prix, id_adresse_fk) 
-                values (:id_tissu_fk, :id_user_fk, :date, :heure, :surface, :prix, :id_adresse_fk)");
-            $stmt->execute(array('id_tissu_fk' => $id, 'id_user_fk' => $id_user_fk,
-                'date' => $date, 'heure' => $heure,
-                'surface' => $tissue['surface'], 'prix' => $tissue['price'],
-                'id_adresse_fk' => $id_adresse_fk));
-            $stmt->closeCursor();
-        } catch (PDOException $e) {
-            echo json_encode(["Connection failed: " =>$e->getMessage()]);
-        }
-    }
-    return true;
-}
-
 function get_wilayas_from_db(){
     global $conn;
     $wilayas = null;
@@ -59,4 +41,52 @@ function get_communes_from_db($id_daira){
         echo json_encode(["Connection failed: " =>$e->getMessage()]);
     }
     return $communes;
+}
+
+function update_phone_number($tel){
+    global $conn;
+    try{
+        $stmt = $conn->prepare("UPDATE user SET telephone=:tel WHERE id_user=:id_user");
+        $stmt->execute(array('tel'=>$tel, 'id_user'=>$_SESSION['id_user']));
+        $stmt->closeCursor();
+    }catch(PDOException $e) {
+        echo json_encode(["Connection failed: " =>$e->getMessage()]);
+    }
+    return true;
+}
+
+function insert_commandes_tissues($tissues, $id_user_fk, $date, $heure, $id_adresse_fk){
+    global $conn;
+    foreach ($tissues as $id => $tissue) {
+        try {
+            $stmt = $conn->prepare("insert into commander_tissu (id_tissu_fk, id_user_fk, date, heure, surface, prix, id_adresse_fk) 
+                values (:id_tissu_fk, :id_user_fk, :date, :heure, :surface, :prix, :id_adresse_fk)");
+            $stmt->execute(array('id_tissu_fk' => $id, 'id_user_fk' => $id_user_fk,
+                                'date' => $date, 'heure' => $heure,
+                                'surface' => $tissue['surface'], 'prix' => $tissue['price'],
+                                'id_adresse_fk' => $id_adresse_fk));
+            $stmt->closeCursor();
+        } catch (PDOException $e) {
+            echo json_encode(["Connection failed: " =>$e->getMessage()]);
+        }
+    }
+    return true;
+}
+
+function insert_commandes_clothes($clothes, $id_user_fk, $date, $heure, $id_adresse_fk){
+    global $conn;
+    foreach ($clothes as $id => $clothe) {
+        try {
+            $stmt = $conn->prepare("insert into commander_vetement (id_vetement_fk, id_user_fk, date, heure, taille, qtt, prix, id_adresse_fk) 
+                values (:id_vetement_fk, :id_user_fk, :date, :heure, :taille, :qtt, :prix, :id_adresse_fk)");
+            $stmt->execute(array('id_vetement_fk' => $id, 'id_user_fk' => $id_user_fk,
+                'date' => $date, 'heure' => $heure,
+                'taille' => $clothe['taille'], 'qtt' => $clothe['qtt'], 'prix' => $clothe['price'],
+                'id_adresse_fk' => $id_adresse_fk));
+            $stmt->closeCursor();
+        } catch (PDOException $e) {
+            echo json_encode(["Connection failed: " =>$e->getMessage()]);
+        }
+    }
+    return true;
 }

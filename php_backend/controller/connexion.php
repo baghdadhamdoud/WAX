@@ -42,8 +42,9 @@ function get_user_session(){
 }
 
 function deconnexion(){
-    if(isset($_SESSION['username']) && isset($_SESSION['nom']) && isset($_SESSION['prenom'])
+    if(isset($_SESSION['id_user']) && isset($_SESSION['username']) && isset($_SESSION['nom']) && isset($_SESSION['prenom'])
         && isset($_SESSION['genre']) && isset($_SESSION['email']) && isset($_SESSION['telephone'])){
+        unset($_SESSION['id_user']);
         unset($_SESSION['username']);
         unset($_SESSION['nom']);
         unset($_SESSION['prenom']);

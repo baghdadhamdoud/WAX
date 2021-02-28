@@ -261,15 +261,6 @@ function delete_from_panier(){
     return json_encode(['status'=>'false']);
 }
 
-// CHECK IF USER IS CONNECTED ---------------------------------------------------------------------------
-// ------------------------------------------------------------------------------------------------------
-function check_if_user_is_connected(){
-    if(isset($_SESSION['id_user'])){
-        return json_encode(['status'=>'true']);
-    }
-    return json_encode(['status'=>'false']);
-}
-
 // MAIN -----------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------------------
 
@@ -290,9 +281,6 @@ function main(){
             break;
         case 'delete_from_panier':
             echo delete_from_panier();
-            break;
-        case 'check_if_user_is_connected':
-            echo check_if_user_is_connected();
             break;
     }
 }

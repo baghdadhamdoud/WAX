@@ -29,6 +29,7 @@
 }
 #connexion .main p.title{
     font-weight: bold;
+    font-size: 1.2em;
 }
 #connexion .main .inscription{
     position: absolute;
@@ -88,4 +89,15 @@
 }
 input:focus + .placeholder, input:valid + .placeholder{
     transform: translateY(-200%) scale(0.8);
+}
+#connexion .main button{
+    border: none;
+    outline: none;
+    background-color: #3b353a;
+    color: #E8DFD8;
+    padding: 10px;
+    width: 100px;
+}
+#connexion .main button:hover{
+    cursor: pointer;
 }

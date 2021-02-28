@@ -69,6 +69,12 @@ function Panier() {
         })
     }
 
+    this.check_if_panier_is_empty = function () {
+        const t = $('#panier_command_container .panier .summary .tissue').is(':hidden');
+        const c = $('#panier_command_container .panier .summary .clothes').is(':hidden');
+        return !!(t && c);
+    }
+
     this.set_panier = function () {
         // DISPLAY PANIER
         $(document).on('click', '#topBar .panier', function () {
@@ -84,25 +90,40 @@ function Panier() {
                         $('#panier_command_container .panier .summary .clothes').show();
                     }
                 }
+                else{
+                    const empty = "<p class='panier_empty'>Panier vide</p>";
+                    $('#panier_command_container .panier .summary').append(empty);
+                }
                 $('#panier_command_container').show('slow');
             });
         });
-        // EXIT PANIER AND COMMAND ***************************
-        $(document).on('click', '#panier_command_container .panier .exit, #panier_command_container .outer', function () {
+        // EXIT PANIER ***************************
+        $(document).on('click', '#panier_command_container .panier .exit, #panier_command_container .outer, #panier_command_container .command .exit', function () {
             $('#panier_command_container').hide('slow', function () {
-                $('#panier_command_container .summary div table *').remove();
+                $('#panier_command_container .panier .summary div table *, #panier_command_container .panier .summary p').remove();
                 let panier = $('#panier_command_container .panier');
                 if(panier.is(':hidden')){
                     panier.show();
                 }
+                $('#panier_command_container .command .infos .address select *').remove();
+                $('#panier_command_container .command .infos .address select.daira, #panier_command_container .command .infos .address select.commune').hide();
             });
         });
         // CLEAR PANIER
         $(document).on('click', '#panier_command_container .panier .btns .vider_panier', function () {
+            if(panier.check_if_panier_is_empty()){
+                return null;
+            }
             const data_php = {target:'clear_panier'};
             panier.hand_of_my_db(data_php).done(function (r,s) {
                 if(r['status'] === 'true'){
+                    // A OPTIMISER PUTAIN -------------------------------------------------------------------------------------------------------
                     $('#panier_command_container .panier .summary div').hide('slow');
+                    let empty = $("<p class='panier_empty'>Panier vide</p>").hide();
+                    $('#panier_command_container .panier .summary').append(empty);
+                    setTimeout(function () {
+                        $('#panier_command_container .panier .summary p').show('slow');
+                    }, 1000);
                 }
             })
         });
@@ -125,43 +146,10 @@ function Panier() {
         });
     }
 
-    this.set_btn_commander = function () {
-        $(document).on('click', '#panier_command_container .panier .btns .commander', function () {
-            const data_php = {target:'check_if_user_is_connected'};
-            panier.hand_of_my_db(data_php).done(function (r) {
-                if(r['status'] === 'true'){
-                    console.log('Il y a un user !');
-                    $.ajax({
-                        url: 'php_backend/controller/command.php',
-                        type: 'POST',
-                        dataType: 'json',
-                        data: {target:'init_command'},
-                        error: function (r, s, e) {
-                            console.log({target:'init_command'});
-                            console.log(e);
-                        }
-                    }).done(function (r) {
-                        if(r['status'] === 'true'){
-                            $('#panier_command_container .command .infos .phone input').val(r['tel']);
-                            $('#panier_command_container .command .infos .address select.wilaya').append(r['wilayas']);
-                            $('#panier_command_container .panier').hide('fast', function () {
-                                $('#panier_command_container .command').show('slow');
-                            });
-                        }
-                    })
-                }
-                else{
-                    console.log('Veillez vous connecter !');
-                }
-            });
-        });
-    }
-
     this.main = function () {
         $('#panier_command_container').hide();
         this.add_to_panier();
         this.set_panier();
-        this.set_btn_commander();
     }
 }
 
