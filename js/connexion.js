@@ -59,7 +59,7 @@ function Connexion() {
                     }
                     else{
                         $('#topBar .welcome').text('Bienvenue '+user['nom'].toUpperCase()+' '+user['prenom']).show();
-                        $('#topBar .deconnexion').show();
+                        $('#topBar div.profil_deconnexion').show();
                         $('#connexion, #topBar .connexion_inscription').hide();
                     }
                 });
@@ -76,11 +76,11 @@ function Connexion() {
     }
 
     this.set_deconnexion = function () {
-        $(document).on('click', '#topBar .deconnexion', function () {
+        $(document).on('click', '#topBar .profil_deconnexion .deconnexion', function () {
             const data_php = {target: 'deconnexion'};
             connexion.hand_of_my_db(data_php).done(function (result) {
                 if(result['status'] === 'true'){
-                    $('#topBar .welcome, #topBar .deconnexion').hide();
+                    $('#topBar .welcome, #topBar .profil_deconnexion').hide();
                     $('#topBar .connexion_inscription').show();
                 }
             })
@@ -92,8 +92,12 @@ function Connexion() {
         topBar.hand_of_my_db(data_php).done(function (user, status) {
             if(user['status'] === 'true'){
                 $('#topBar .welcome').text('Bienvenue '+user['nom'].toUpperCase()+' '+user['prenom']).show();
-                $('#topBar .deconnexion').show();
+                $('#topBar div.profil_deconnexion').show();
                 $('#connexion, #topBar .connexion_inscription').hide();
+            }
+            else{
+                console.log('b');
+                $('#topBar div.profil_deconnexion').hide();
             }
         });
     }

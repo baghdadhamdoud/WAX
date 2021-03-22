@@ -10,8 +10,12 @@
         <p class="connexion">Connexion</p>
         <p class="inscription">Insciption</p>
     </div>
-    <div class="deconnexion">
-        <p>Déconnexion</p>
+    <div class="profil_deconnexion">
+        <div class="profil">
+            <p>Profil</p>
+            <div></div>
+        </div>
+        <p class="deconnexion">Déconnexion</p>
     </div>
 </div>
 <?php echo ob_get_clean();

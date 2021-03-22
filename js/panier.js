@@ -98,7 +98,7 @@ function Panier() {
             });
         });
         // EXIT PANIER ***************************
-        $(document).on('click', '#panier_command_container .panier .exit, #panier_command_container .outer, #panier_command_container .command .exit', function () {
+        $(document).on('click', '#panier_command_container .panier .exit, #panier_command_container .outer', function () {
             $('#panier_command_container').hide('slow', function () {
                 $('#panier_command_container .panier .summary div table *, #panier_command_container .panier .summary p').remove();
                 let panier = $('#panier_command_container .panier');

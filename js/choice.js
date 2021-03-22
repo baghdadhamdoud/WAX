@@ -19,20 +19,23 @@ function Choice() {
             const php_data = {target:'get_tissues'};
             choice.hand_of_my_db(php_data).done(function (tissues, success) {
                if(success === 'success'){
-                   $('#navBar').show();
-                   $('#choice').hide('slow');
-                   $('#navBar #nav-tissue li.title').addClass('li_choose')
-                   $('#container-products').append(tissues).show('slow');
+                $('#container-products').append(tissues).show('fast', function(){
+                    $('#navBar').show('fast');
+                    $('#choice').hide('slow');
+                    $('#navBar #nav-tissue li.title').addClass('li_choose')
+                });
                }
             });
         });
         $(document).on('click', '#choice .clothes', function (e) {
             const php_data = {target:'get_clothes'};
             choice.hand_of_my_db(php_data).done(function (clothes) {
-                $('#navBar').show();
-                $('#choice').hide('slow');
-                $('#navBar #nav-clothes li.title').addClass('li_choose')
-                $('#container-products').append(clothes).show('slow');
+                $('#container-products').append(clothes).show('fast', function () { 
+                    $('#choice').hide('fast');
+                    $('#navBar').show('fast');
+                    $('#navBar #nav-clothes li.title').addClass('li_choose')
+                });
+                
             });
         });
     }

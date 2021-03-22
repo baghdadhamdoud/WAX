@@ -21,6 +21,8 @@
     <!--    CSS OF PRODUCTS-->
     <link href="css/choice.css" rel="stylesheet"/>
     <link href="css/products.css" rel="stylesheet"/>
+    <!--    CSS of FOOTER-->
+    <link href="css/footer.css" rel="stylesheet"/>
 </head>
 <body>
 <!-- SET TOP-BAR-->

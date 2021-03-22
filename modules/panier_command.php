@@ -21,8 +21,9 @@ ob_start();
             <button type="button" class="commander">Commander</button>
         </div>
     </div>
+    <div class="outer_alert_not_user"></div>
     <div class="alert_not_user">
-        <p>Veuillez vous connecter !</p>
+        <p>Veuillez vous connecter pour pouvoir passer votre commande !</p>
         <button type="button">Connexion</button>
         <span class="exit">X</span>
     </div>
@@ -46,6 +47,7 @@ ob_start();
             <button type="button" class="valid">Valider</button>
         </div>
     </div>
+    <div class="outer_alert_command_validated"></div>
     <div class="alert_command_validated">
         <p>Votre Commande à bien été validée !<br>
         Vous receverez sous peu un appel téléphonique confirmant votre Commande.<br>

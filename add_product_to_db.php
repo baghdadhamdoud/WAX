@@ -16,12 +16,17 @@
         <span class="placeholder">Label du Produit</span>
     </div>
     <div id="add-tissue-clothes">
-    <!-- TISSUE ///////////////////////////////////////////////////////////////// -->
+        <!-- TISSUE ///////////////////////////////////////////////////////////////// -->
         <div class="big-input" id="add-tissue">
             <!-- TISSUE : PRICE ----------------------------------------- -->
             <div class="input" id="add-tissue-price">
                 <input type="text" required>
                 <span class="placeholder">Prix du Tissu</span>
+            </div>
+            <!-- TISSUE : STOCKE ----------------------------------------- -->
+            <div class="input" id="add-tissue-stoke">
+                <input type="number" required>
+                <span class="placeholder">Stocke en Surface</span> 
             </div>
             <!-- TISSUE : IMAGE ----------------------------------------- -->
             <div class="add-img">
@@ -31,11 +36,6 @@
                     <span>Image du Tissu ...</span>
                     <input class="input-file" id="input-tissue" type="file" accept="image/jpg, image/png, image/jpeg">
                 </label>
-            </div>
-            <!-- TISSUE : STOCKE ----------------------------------------- -->
-            <div class="input" id="add-tissue-stoke">
-                <input type="number" required>
-                <span class="placeholder">Stocke en Surface</span> 
             </div>
             <button type="button">Add Tissue</button>
         </div>

@@ -21,8 +21,19 @@
 	cursor: pointer;
 }
 /*WELCOME and DECONNEXION*/
-#topBar .welcome, #topBar .deconnexion{
+#topBar .welcome, #topBar .profil_deconnexion{
     display: none;
+}
+#topBar p.welcome{
+    font-weight: bold;
+    font-style: italic;
+}
+#topBar .profil_deconnexion{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 10%;
 }
 /*PANIER*/
 #topBar .panier img{
@@ -39,6 +50,7 @@
     justify-content: space-between;
     align-items: center;
 }
-#topBar .connexion_inscription p:hover, #topBar .deconnexion p:hover{
+#topBar .connexion_inscription p:hover, #topBar .profil_deconnexion p:hover{
     cursor: pointer;
+    font-weight: bold;
 }

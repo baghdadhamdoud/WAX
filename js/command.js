@@ -14,6 +14,18 @@ function Command() {
         })
     }
 
+    this.hand_of_my_db_panier = function (data) {
+        return $.ajax({
+            url: 'php_backend/controller/panier.php',
+            type: 'POST',
+            dataType: 'json',
+            data: data,
+            error: function (r, s, e) {
+                console.log(e);
+            }
+        })
+    }
+
     // TRY TO DELETE
     this.check_if_panier_is_empty = function () {
         const t = $('#panier_command_container .panier .summary .tissue').is(':hidden');
@@ -48,12 +60,14 @@ function Command() {
                 }
                 else{
                     console.log('Veuillez vous connecter !');
+                    $('#panier_command_container .outer_alert_not_user').show('fast');
                     if($('#panier_command_container .alert_not_user').hasClass('alert_hide')){
                         $('#panier_command_container .alert_not_user').removeClass('alert_hide');
                     }
                     $('#panier_command_container .alert_not_user').addClass('alert_display');
-                    $('#panier_command_container .panier').addClass('div_pause')
-                    $(document).on('click', '#panier_command_container .alert_not_user .exit, #panier_command_container .outer, #panier_command_container .alert_not_user button', function () {
+                    $('#panier_command_container .panier').addClass('div_pause');
+                    $(document).on('click', '#panier_command_container .alert_not_user .exit, #panier_command_container .outer_alert_not_user, #panier_command_container .alert_not_user button', function () {
+                        $('#panier_command_container .outer_alert_not_user').hide('fast');
                         $('#panier_command_container .alert_not_user').removeClass('alert_not_user_display').addClass('alert_hide');
                         $('#panier_command_container .panier').removeClass('div_pause');
                     });
@@ -75,11 +89,11 @@ function Command() {
                 $('#panier_command_container .command .infos .address select *').remove();
                 $('#panier_command_container .command .infos .address select.daira, #panier_command_container .command .infos .address select.commune').hide();
             });
-        })
+        });
         //BUTTON BACK
         $(document).on('click', '#panier_command_container .command .btns .back', function () {
             $('#panier_command_container .command').hide('fast', function () {
-                $('#panier_command_container .panier').show('slow');
+                $('#panier_command_container .panier').show('fast');
                 $('#panier_command_container .command .infos .address select *').remove();
                 $('#panier_command_container .command .infos .address select.daira, #panier_command_container .command .infos .address select.commune').hide();
             })
@@ -90,6 +104,7 @@ function Command() {
             const data_php = {target:'get_daira', id_wilaya:id_wilaya};
             command.hand_of_my_db(data_php).done(function (r) {
                 if(r['status'] === 'true'){
+                    $('#panier_command_container .command .infos .address select.daira *').remove();
                     $('#panier_command_container .command .infos .address select.daira').append(r['daira']).show('fast');
                 }
             })
@@ -100,11 +115,12 @@ function Command() {
             const data_php = {target:'get_commune', id_daira:id_daira};
             command.hand_of_my_db(data_php).done(function (r) {
                 if(r['status'] === 'true'){
+                    $('#panier_command_container .command .infos .address select.commune *').remove();
                     $('#panier_command_container .command .infos .address select.commune').append(r['commune']).show('fast');
                 }
             })
         });
-        //BUTTON VALID
+        //BUTTON VALID --- Faut Vraiment l'Optimiser --
         $(document).on('click', '#panier_command_container .command .btns .valid', function () {
             const id_commune = String($('#panier_command_container .command .infos .address select.commune').val()).split('-')[0];
             if(id_commune === 'null'){
@@ -122,9 +138,30 @@ function Command() {
             command.hand_of_my_db(data_php).done(function (r) {
                 if(r['status'] === 'true'){
                     console.log('Votre commande a bien été passée !');
+                    $('#panier_command_container .outer_alert_command_validated').show('fast');
                     $('#panier_command_container .alert_command_validated').removeClass('alert_hide').addClass('alert_display');
-                    $(document).on('click', '#panier_command_container .alert_command_validated .exit, #panier_command_container .outer', function () {
+                    $(document).on('click', '#panier_command_container .alert_command_validated .exit, #panier_command_container .outer_alert_command_validated', function () {
                         $('#panier_command_container .alert_command_validated').addClass('alert_hide').removeClass('alert_display');
+                        $('#panier_command_container .outer_alert_command_validated').hide('fast');
+                        $('#panier_command_container').hide('slow', function () {
+                            $('#panier_command_container .panier .summary div table *, #panier_command_container .panier .summary p').remove();
+                            let panier = $('#panier_command_container .panier');
+                            if(panier.is(':hidden')){
+                                panier.show();
+                            }
+                            $('#panier_command_container .command .infos .address select *').remove();
+                            $('#panier_command_container .command .infos .address select.daira, #panier_command_container .command .infos .address select.commune').hide();
+                            $('#panier_command_container .command').hide('slow', function () {
+                                $('#panier_command_container .command .infos .address select *').remove();
+                                $('#panier_command_container .command .infos .address select.daira, #panier_command_container .command .infos .address select.commune').hide();
+                            });
+                            const data_php = {target:'clear_panier'};
+                            command.hand_of_my_db_panier(data_php).done(function(r){
+                                if(r['status'] === 'true'){
+                                    $('#panier_command_container .panier .summary div').hide('slow');
+                                }
+                            })
+                        });
                     })
                 }
                 else{

@@ -29,8 +29,10 @@ function NavBar() {
 			$(e.target).addClass('li_choose');
 			const data_php = {target:'get_tissues_nav_bar'};
 			navBar.hand_of_my_db(data_php).done(function (tissues) {
-				$('#container-products .product').remove();
-				$('#container-products').append(tissues).show('slow');
+				$('#container-products').hide('fast', function(){
+					$('#container-products .product').remove();
+					$('#container-products').append(tissues).show('fast');
+				});
 			});
 		});
 		$(document).on('click', '#navBar #nav-clothes #nav-clothes-sexe li', function (e) {
@@ -41,8 +43,10 @@ function NavBar() {
 			const sexe = $(e.target).text();
 			const data_php = {target:'get_clothes_nav_bar', sexe: sexe};
 			navBar.hand_of_my_db(data_php).done(function (clothes) {
-				$('#container-products .product').remove();
-				$('#container-products').append(clothes);
+				$('#container-products').hide('fast', function(){
+					$('#container-products .product').remove();
+					$('#container-products').append(clothes).show('fast');
+				});
 			});
 		});
 		$(document).on('click', '#navBar #nav-clothes #nav-clothes-types li', function (e) {
@@ -52,8 +56,10 @@ function NavBar() {
 			const type = $(e.target).text();
 			const data_php = {target:'get_clothes_nav_bar', sexe: sexe, type: type};
 			navBar.hand_of_my_db(data_php).done(function (clothes) {
-				$('#container-products .product').remove();
-				$('#container-products').append(clothes);
+				$('#container-products').hide('fast', function(){
+					$('#container-products .product').remove();
+					$('#container-products').append(clothes).show('fast');
+				});
 			});
 		});
 	}

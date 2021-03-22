@@ -70,7 +70,47 @@
 #panier_command_container .command .btns button:hover{
     cursor: pointer;
 }
-/* ALERT COMMAND VALIDATED --------------------------------------------------*/
+/* ALERT COMMAND VALIDATED && CONNEXION --------------------------------------------------*/
+#panier_command_container .alert_not_user{
+    position: absolute;
+    width: 300px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #2b2b2b;
+    color: #E8DFD8;
+    z-index: 5;
+    padding: 20px 10px 0 10px;
+    transform: translateX(-350%);
+}
+#panier_command_container .outer_alert_not_user, #panier_command_container .outer_alert_command_validated{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    z-index: 4;
+    opacity: 0.1;
+    display: none;
+}
+#panier_command_container .alert_not_user p{
+    font-weight: bold;
+    /*font-size: 1.5em;*/
+}
+#panier_command_container .alert_not_user button{
+    border: none;
+    outline: none;
+    background-color: #E8DFD8;
+    color: #3b353a;
+    padding: 10px 5px 10px 5px;
+    font-weight: bold;
+}
+#panier_command_container .alert_not_user button:hover{
+    cursor: pointer;
+}
 #panier_command_container .alert_command_validated{
     position: absolute;
     width: 500px;
@@ -81,7 +121,7 @@
     align-items: center;
     background-color: #2b2b2b;
     color: #E8DFD8;
-    z-index: 4;
+    z-index: 5;
     padding: 20px 10px 0 10px;
     transform: translateX(-350%);
 }
@@ -96,4 +136,22 @@
     0%{background-color: #E8DFD8; color: black}
     50%{background-color: darkred; color: #E8DFD8}
     100%{background-color: #E8DFD8; color: black}
+}
+.alert_display{
+    animation: alert_display_animate 0.5s forwards;
+}
+@keyframes alert_display_animate {
+    0%{transform: translateX(-350%)}
+    100%{transform: translateX(0)}
+}
+.alert_hide{
+    animation: alert_hide_animate 0.5s forwards;
+}
+@keyframes alert_hide_animate {
+    0%{transform: translateX(0)}
+    100%{transform: translateX(350%)}
+}
+.div_pause{
+    pointer-events: none;
+    opacity: 0.6;
 }
